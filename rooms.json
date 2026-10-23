@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "room_name": "Conference Room A",
+        "capacity": 10,
+        "location": "Floor 1"
+    },
+    {
+        "id": 2,
+        "room_name": "Conference Room B",
+        "capacity": 20,
+        "location": "Floor 2"
+    },
+    {
+        "id": 3,
+        "room_name": "Interview Room",
+        "capacity": 5,
+        "location": "Floor 3"
+    }
+]
