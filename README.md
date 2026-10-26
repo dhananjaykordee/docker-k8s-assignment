@@ -30,6 +30,13 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
+Install test dependencies and run the automated tests:
+
+```powershell
+python -m pip install -r requirements-dev.txt
+python -m pytest
+```
+
 Create a `.env` file in the project root:
 
 ```dotenv
