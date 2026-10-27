@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meeting-room-booking-config
+data:
+  DATABASE_URL: "h2:///./data/meeting-room-booking.db"
+  ALGORITHM: "HS256"
+  ACCESS_TOKEN_EXPIRE_MINUTES: "30"

@@ -83,6 +83,10 @@ class BookingService:
         return BookingRepository.get_all_by_user(db, username)
 
     @staticmethod
+    def get_room_bookings(room_id, db):
+        return BookingRepository.get_all_by_room(db, room_id)
+
+    @staticmethod
     def get_booking(booking_id, db):
         return BookingRepository.get_by_id(db, booking_id)
 

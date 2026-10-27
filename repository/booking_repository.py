@@ -21,6 +21,10 @@ class BookingRepository:
         return db.query(Booking).filter(Booking.username == username).all()
 
     @staticmethod
+    def get_all_by_room(db, room_id):
+        return db.query(Booking).filter(Booking.room_id == room_id).all()
+
+    @staticmethod
     def get_by_id(db, booking_id):
         return db.query(Booking).filter(Booking.id == booking_id).first()
 

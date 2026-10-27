@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: docker-demo
+  labels:
+    app: docker-demo
+spec:
+  replicas: 2
+  serviceName: docker-demo-headless
+  selector:
+    matchLabels:
+      app: docker-demo
+  template:
+    metadata:
+      labels:
+        app: docker-demo
+    spec:
+      containers:
+        - name: docker-demo
+          image: docker-demo:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: app-storage
+              mountPath: /app/data
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: meeting-room-booking-secrets
+                  key: secret-key
+          envFrom:
+            - configMapRef:
+                name: meeting-room-booking-config
+          readinessProbe:
+            httpGet:
+              path: /openapi.json
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /openapi.json
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+  volumeClaimTemplates:
+    - metadata:
+        name: app-storage
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi
